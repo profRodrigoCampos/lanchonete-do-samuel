@@ -1,0 +1,208 @@
+/* Tela do Samuel */
+.icone-botao { width: 24px; height: 24px; display: inline-flex; flex-shrink: 0; }
+.icone-botao svg { width: 100%; height: 100%; }
+.icone-botao.grande { width: 34px; height: 34px; }
+
+/* ---------- Abertura ---------- */
+.abertura {
+  position: fixed; inset: 0; z-index: 60;
+  background: var(--vermelho);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+  padding: 24px; text-align: center; color: #fff;
+}
+.abertura.fechada { background: #6F6862; }
+.abertura-placa { width: 220px; max-width: 70vw; transform-origin: 50% 8%; animation: balancinho 3s ease-in-out infinite; }
+.abertura-placa svg { width: 100%; height: auto; }
+@keyframes balancinho { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+.abertura-rotulo { font-size: 22px !important; font-weight: 700 !important; letter-spacing: 1px; color: #fff; }
+.abertura-dica { font-size: 16px !important; font-weight: 500 !important; opacity: 0.92; max-width: 300px; }
+.botao-abrir:disabled { opacity: 0.6; animation: none; }
+.abertura h1 {
+  margin: 0; font-size: 36px; color: var(--amarelo);
+  text-shadow: 2px 2px 0 var(--tinta), -1.5px -1.5px 0 var(--tinta), 1.5px -1.5px 0 var(--tinta), -1.5px 1.5px 0 var(--tinta);
+}
+.abertura p { margin: 0; font-size: 18px; font-weight: 600; }
+.botao-abrir {
+  width: 130px; height: 130px; border-radius: 50%;
+  background: var(--verde); color: #fff;
+  border: 6px solid var(--tinta);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+  display: flex; align-items: center; justify-content: center;
+  animation: pulinho 1.6s ease-in-out infinite;
+}
+.botao-abrir svg { width: 64px; height: 64px; margin-left: 8px; }
+.botao-abrir:active { transform: translateY(4px); }
+
+/* ---------- Contador da fila ---------- */
+.fila-contador {
+  display: flex; align-items: center; gap: 4px;
+  background: #fff; border: 3px solid var(--tinta); border-radius: 999px;
+  padding: 4px 12px 4px 6px;
+}
+.fila-icone { width: 30px; height: 30px; }
+.fila-icone svg { width: 100%; height: 100%; }
+.fila-contador strong { font-size: 26px; line-height: 1; }
+
+/* ---------- Vazio ---------- */
+.vazio { text-align: center; padding: 30px 10px; }
+.mascote-espera { width: 160px; height: 134px; margin: 0 auto 12px; animation: pulinho 2s ease-in-out infinite; }
+.mascote-espera svg { width: 100%; height: 100%; }
+.vazio h2 { font-size: 26px; margin: 0 0 8px; }
+.vazio p { font-size: 17px; color: var(--tinta-suave); margin: 0; }
+.pontinhos span { animation: piscar 1.4s infinite; }
+.pontinhos span:nth-child(2) { animation-delay: 0.2s; }
+.pontinhos span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes piscar { 0%, 80%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+/* ---------- Pedido ---------- */
+.pedido {
+  background: #fff; border: 5px solid var(--vermelho); border-radius: 26px;
+  padding: 14px; margin-bottom: 16px;
+}
+.pedido-cabeca { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pedido-numero { display: flex; align-items: baseline; gap: 4px; }
+.pedido-numero span { font-size: 20px; font-weight: 600; }
+.pedido-numero strong { font-size: 44px; line-height: 1; color: var(--vermelho); }
+.pedido-pago {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--verde-claro); border: 3px solid var(--verde); border-radius: 14px;
+  padding: 4px 10px; font-weight: 700; font-size: 17px; color: #1E6B30;
+}
+.pedido-pago > span:last-child { display: flex; flex-direction: column; line-height: 1.05; }
+.pedido-pago small { font-size: 12px; font-weight: 600; color: var(--tinta-suave); }
+.pago-icone { width: 40px; height: 30px; }
+.pago-icone svg { width: 100%; height: 100%; }
+
+.letras-nome { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin: 10px 0 12px; }
+.letra {
+  width: 36px; height: 46px; border: 3px solid var(--tinta); border-radius: 8px; background: var(--creme);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 27px; font-weight: 700;
+}
+.letra.espaco { border-style: dashed; border-color: #CDBFB2; background: transparent; }
+
+.itens { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.item {
+  position: relative; width: 100%;
+  display: flex; align-items: center; gap: 10px;
+  min-height: 84px;
+  background: var(--creme); border: 3px solid #E9DCCB; border-radius: 18px;
+  padding: 8px 46px 8px 10px;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+.item:active { transform: scale(0.99); }
+.item-icone { width: 76px; height: 68px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.item-icone svg { max-width: 100%; max-height: 100%; }
+.item-meio { flex: 1; min-width: 0; display: flex; align-items: center; }
+.item-extras { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.item-extras .extra { width: 34px; height: 34px; }
+.item-extras .extra-carne { width: 46px; height: 28px; margin-right: 2px; }
+.item-extras svg { width: 100%; height: 100%; }
+.item-quantidade {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #fff; border: 4px solid var(--tinta);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; font-weight: 700;
+}
+.item .moedas { flex-shrink: 0; max-width: 76px; justify-content: flex-end; }
+.item-check {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 3px solid var(--tinta); background: #fff; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.item-check svg { width: 22px; height: 22px; opacity: 0; }
+.item.feito { background: var(--verde-claro); border-color: var(--verde); }
+.item.feito .item-icone, .item.feito .item-meio, .item.feito .moedas { opacity: 0.55; }
+.item.feito .item-check { background: var(--verde); }
+.item.feito .item-check svg { opacity: 1; }
+
+.area-preco { margin-bottom: 12px; }
+.preco-revelado { display: flex; justify-content: center; margin-top: 12px; }
+.preco-grande {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: var(--verde-moeda); border: 5px solid var(--tinta);
+  line-height: 1; animation: aparecer 0.25s ease-out both;
+}
+.preco-grande small { font-size: 24px; font-weight: 700; }
+.preco-grande b { font-size: 56px; }
+
+.botao-entregar { min-height: 70px; font-size: 26px; letter-spacing: 1px; }
+
+/* ---------- Próximos ---------- */
+.proximos h2 { font-size: 20px; margin: 0 0 8px; }
+.proximos ul { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.proximo {
+  display: flex; align-items: center; gap: 10px;
+  background: #fff; border: 3px solid #E9DCCB; border-radius: 16px; padding: 8px 12px;
+}
+.proximo-numero { font-weight: 700; color: var(--vermelho); font-size: 17px; flex-shrink: 0; }
+.proximo-nome { font-weight: 700; font-size: 19px; letter-spacing: 1px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.proximo-icones { margin-left: auto; display: flex; gap: 3px; flex-shrink: 0; }
+.proximo-icones span { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
+.proximo-icones svg { max-width: 100%; max-height: 100%; }
+
+/* ---------- Fechar ---------- */
+.botao-fechar { margin-top: 8px; color: var(--vermelho); border-color: var(--vermelho); }
+.botao-fechar .icone-botao { width: 26px; height: 26px; }
+
+.modal {
+  position: fixed; inset: 0; z-index: 45;
+  background: rgba(58, 36, 24, 0.6);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-caixa {
+  background: #fff; border: 6px solid var(--tinta); border-radius: 30px;
+  padding: 18px 18px 20px; text-align: center; width: 100%; max-width: 380px;
+  animation: aparecer 0.2s ease-out both;
+}
+.modal-placa { width: 170px; margin: 0 auto; }
+.modal-placa svg { width: 100%; height: auto; }
+.modal-caixa h2 { font-size: 32px; margin: 6px 0 4px; }
+.modal-caixa p { font-size: 17px; color: var(--tinta-suave); margin: 0 0 16px; }
+.modal-botoes { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; }
+.modal-botoes .botao { padding: 8px 10px; gap: 6px; font-size: 18px; white-space: nowrap; }
+
+/* ---------- Área do adulto ---------- */
+.adulto { margin-top: 24px; border-top: 2px dashed #D9CBBB; padding-top: 10px; }
+.adulto summary {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px;
+  font-size: 15px; font-weight: 600; color: var(--tinta-suave); cursor: pointer; list-style: none;
+}
+.adulto summary::-webkit-details-marker { display: none; }
+.adulto .icone-botao { width: 20px; height: 20px; }
+.adulto-conteudo { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; padding: 6px 0 10px; }
+.adulto-dica { font-size: 14px; color: var(--tinta-suave); margin: 0; }
+.adulto-titulo { font-size: 15px; font-weight: 600; margin: 4px 0 0; }
+.downloads { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- Alerta de pedido novo ---------- */
+.alerta-novo {
+  position: fixed; inset: 0; z-index: 40;
+  background: rgba(58, 36, 24, 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.alerta-caixa {
+  background: var(--amarelo); border: 6px solid var(--tinta); border-radius: 30px;
+  padding: 24px 20px; text-align: center; width: 100%; max-width: 380px;
+  animation: aparecer 0.25s ease-out both;
+}
+.alerta-sino { width: 110px; height: 88px; margin: 0 auto; animation: balanco 0.5s ease-in-out 4; transform-origin: 50% 10%; }
+.alerta-sino svg { width: 100%; height: 100%; }
+.alerta-titulo { font-size: 34px; font-weight: 700; margin: 6px 0 4px; }
+.alerta-caixa .letra { background: #fff; }
+
+@media (min-width: 600px) {
+  .conteudo { max-width: 640px; }
+  .item-icone { width: 96px; height: 80px; }
+}
+
+@media (max-width: 370px) {
+  .item { padding-right: 42px; gap: 6px; }
+  .item-icone { width: 62px; height: 58px; }
+  .item .moedas { max-width: 66px; }
+  .item .moeda { width: 20px; height: 20px; font-size: 12px; }
+  .item-extras .extra { width: 28px; height: 28px; }
+  .letra { width: 30px; height: 40px; font-size: 23px; }
+}

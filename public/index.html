@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D62828">
+<title>Lanchonete do Samuel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/css/estilo.css">
+<link rel="stylesheet" href="/css/cliente.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="logo" id="logo"></div>
+  <div class="topo-textos">
+    <span class="topo-linha1">LANCHONETE</span>
+    <span class="topo-linha2">DO SAMUEL</span>
+  </div>
+</header>
+
+<main class="conteudo">
+
+  <!-- 0. FECHADA -->
+  <section class="tela" id="tela-fechada" hidden aria-labelledby="titulo-fechada" aria-live="polite">
+    <div class="fechada-caixa">
+      <div class="placa-fechado" id="placa-fechado"></div>
+      <div class="dormindo-area">
+        <div class="mascote dormindo" id="mascote-dormindo"></div>
+        <span class="zzz" aria-hidden="true"><span>z</span><span>z</span><span>Z</span></span>
+      </div>
+      <h1 id="titulo-fechada">A lanchonete está fechada</h1>
+      <p class="subtitulo" id="texto-fechada">Espere o Samuel abrir. Esta tela muda sozinha!</p>
+      <div class="esperando" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <!-- 1. NOME -->
+  <section class="tela" id="tela-nome" hidden aria-labelledby="titulo-nome">
+    <div class="boas-vindas">
+      <div class="mascote" id="mascote-nome"></div>
+      <h1 id="titulo-nome">Oi! Qual é o seu nome?</h1>
+      <p>Pode ser um apelido. O Samuel vai chamar você por ele.</p>
+    </div>
+    <form id="form-nome" class="form-nome" autocomplete="off">
+      <label for="campo-nome" class="sr-only">Seu nome ou apelido</label>
+      <input id="campo-nome" class="campo campo-nome" type="text" maxlength="10" placeholder="Ex.: JU" autocapitalize="characters" enterkeyhint="go" required>
+      <div class="letras-dica"><span id="contador-nome">0</span> de 10 letras</div>
+      <button type="submit" class="botao botao-vermelho botao-cheio" id="botao-comecar" disabled>Fazer meu pedido</button>
+    </form>
+  </section>
+
+  <!-- 2. MONTAR PEDIDO -->
+  <section class="tela" id="tela-montar" hidden aria-labelledby="titulo-montar">
+    <div class="ola-linha">
+      <h1 id="titulo-montar">O que você vai querer, <span class="nome-cliente"></span>?</h1>
+      <button type="button" class="link-trocar" data-acao="trocar-nome">Trocar nome</button>
+    </div>
+    <div id="cardapio"></div>
+  </section>
+
+  <!-- 3. RESUMO -->
+  <section class="tela" id="tela-resumo" hidden aria-labelledby="titulo-resumo">
+    <h1 id="titulo-resumo">Confere seu pedido, <span class="nome-cliente"></span>?</h1>
+    <div class="cartao-branco">
+      <ul class="lista-resumo" id="lista-resumo"></ul>
+      <div class="linha-total">
+        <span>Total</span>
+        <strong id="total-resumo">R$ 0</strong>
+      </div>
+    </div>
+    <div class="botoes-duplos">
+      <button type="button" class="botao botao-branco" data-acao="voltar-montar">
+        <span class="icone-botao" data-icone="voltar"></span> Mudar
+      </button>
+      <button type="button" class="botao botao-verde" data-acao="ir-pagamento">Pagar</button>
+    </div>
+  </section>
+
+  <!-- 4. PAGAMENTO -->
+  <section class="tela" id="tela-pagamento" hidden aria-labelledby="titulo-pagamento">
+    <div id="pagamento-escolha">
+      <h1 id="titulo-pagamento">Como você vai pagar?</h1>
+      <p class="subtitulo">Total: <strong class="total-texto"></strong> <span class="selo-brincadeira">de brincadeira</span></p>
+      <div class="opcoes-pagamento" id="opcoes-pagamento"></div>
+      <button type="button" class="botao botao-branco botao-cheio" data-acao="voltar-resumo">
+        <span class="icone-botao" data-icone="voltar"></span> Voltar
+      </button>
+    </div>
+
+    <div id="pagamento-dinheiro" hidden class="pagamento-etapa">
+      <h1>Dinheiro</h1>
+      <p class="subtitulo">Entregue <strong class="total-texto"></strong> para o Samuel.</p>
+      <div class="moedas-grandes-area" id="moedas-dinheiro"></div>
+      <button type="button" class="botao botao-verde botao-cheio" data-acao="confirmar-pagamento">Pronto, já paguei!</button>
+      <button type="button" class="botao botao-branco botao-cheio" data-acao="voltar-escolha">Escolher outro jeito</button>
+    </div>
+
+    <div id="pagamento-cartao" hidden class="pagamento-etapa">
+      <h1>Cartão</h1>
+      <p class="subtitulo">Encoste o cartão no celular e aperte pagar.</p>
+      <div class="maquininha">
+        <div class="maquininha-tela"><span>Valor</span><strong class="total-texto"></strong></div>
+        <div class="cartao-animado" id="cartao-animado"></div>
+      </div>
+      <button type="button" class="botao botao-verde botao-cheio" data-acao="confirmar-pagamento">Pagar <span class="total-texto"></span></button>
+      <button type="button" class="botao botao-branco botao-cheio" data-acao="voltar-escolha">Escolher outro jeito</button>
+    </div>
+
+    <div id="pagamento-pix" hidden class="pagamento-etapa">
+      <h1>Pix</h1>
+      <p class="subtitulo">Aponte a câmera para o código <span class="selo-brincadeira">de brincadeira</span></p>
+      <div class="qr-falso" id="qr-falso" role="img" aria-label="Código de brincadeira"></div>
+      <button type="button" class="botao botao-verde botao-cheio" data-acao="confirmar-pagamento">Já paguei!</button>
+      <button type="button" class="botao botao-branco botao-cheio" data-acao="voltar-escolha">Escolher outro jeito</button>
+    </div>
+
+    <div id="pagamento-processando" hidden class="pagamento-etapa centro">
+      <div class="girando" aria-hidden="true"></div>
+      <h1>Pagando...</h1>
+      <p class="subtitulo">Só um instantinho.</p>
+    </div>
+
+    <div id="pagamento-erro" hidden class="pagamento-etapa centro">
+      <h1>Ops!</h1>
+      <p class="subtitulo" id="texto-erro">Não consegui mandar o pedido.</p>
+      <button type="button" class="botao botao-vermelho botao-cheio" data-acao="confirmar-pagamento">Tentar de novo</button>
+      <button type="button" class="botao botao-branco botao-cheio" data-acao="voltar-resumo">Voltar</button>
+    </div>
+  </section>
+
+  <!-- 5. ACOMPANHAR -->
+  <section class="tela" id="tela-acompanhar" hidden aria-labelledby="titulo-acompanhar" aria-live="polite">
+    <div class="cartao-branco centro">
+      <div class="numero-pedido">Pedido nº <strong id="numero-pedido">0</strong></div>
+      <div class="letras-nome" id="letras-acompanhar"></div>
+
+      <div id="estado-preparando">
+        <div class="mascote pulando" id="mascote-preparando"></div>
+        <h1 id="titulo-acompanhar">Seu pedido foi para a cozinha!</h1>
+        <p class="subtitulo" id="texto-fila">O Samuel está preparando.</p>
+      </div>
+
+      <div id="estado-pronto" hidden>
+        <div class="mascote festa" id="mascote-pronto"></div>
+        <h1>Pedido pronto!</h1>
+        <p class="subtitulo">Pode buscar com o Samuel. Bom apetite!</p>
+      </div>
+    </div>
+    <ul class="lista-resumo lista-compacta" id="lista-acompanhar"></ul>
+    <button type="button" class="botao botao-vermelho botao-cheio" data-acao="novo-pedido" id="botao-novo" hidden>Fazer outro pedido</button>
+  </section>
+
+</main>
+
+<!-- Para os pais: arquivos para imprimir (aparece em todas as telas) -->
+<footer class="rodape-pais">
+  <details class="pais">
+    <summary><span class="icone-pais" data-icone="baixar"></span> Para os pais: cardápio e comandas para imprimir</summary>
+    <p>Arquivos em PDF, tamanho A4. Na impressora, escolha "Tamanho real" ou "100%".</p>
+    <div class="downloads">
+      <a class="botao botao-branco botao-pequeno" href="/impressao/cardapio-lanchonete-do-samuel.pdf" download>
+        <span class="icone-pais" data-icone="baixar"></span> Cardápio (PDF)
+      </a>
+      <a class="botao botao-branco botao-pequeno" href="/impressao/comandas-lanchonete-do-samuel.pdf" download>
+        <span class="icone-pais" data-icone="baixar"></span> Comandas (PDF)
+      </a>
+    </div>
+  </details>
+</footer>
+
+<!-- Barra com total (só na montagem) -->
+<div class="barra-total" id="barra-total" hidden>
+  <div class="barra-total-interna">
+    <div class="barra-valor">
+      <span>Total</span>
+      <strong id="total-barra">R$ 0</strong>
+    </div>
+    <button type="button" class="botao botao-verde" data-acao="ir-resumo" id="botao-continuar" disabled>Continuar</button>
+  </div>
+</div>
+
+<div class="aviso" id="aviso" role="status" hidden></div>
+
+<script src="/js/cardapio.js"></script>
+<script src="/js/icones.js"></script>
+<script src="/js/comum.js"></script>
+<script src="/js/cliente.js"></script>
+</body>
+</html>

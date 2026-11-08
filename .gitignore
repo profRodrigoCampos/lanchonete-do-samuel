@@ -1,0 +1,12 @@
+# Dependências (o projeto não usa nenhuma, mas por garantia)
+node_modules/
+
+# Logs
+*.log
+
+# Pasta de dados de versões antigas (a versão atual não grava arquivos)
+dados/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db

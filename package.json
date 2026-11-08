@@ -1,0 +1,23 @@
+{
+  "name": "lanchonete-do-samuel",
+  "version": "1.0.0",
+  "description": "Site de faz de conta de lanchonete para crianças: pedidos pelo celular e tela visual da cozinha. Projeto educativo em Node.js puro, HTML, CSS e JavaScript.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "educacao",
+    "nodejs",
+    "javascript",
+    "api-rest",
+    "brincadeira",
+    "termux"
+  ],
+  "author": "Rodrigo Campos",
+  "license": "MIT"
+}

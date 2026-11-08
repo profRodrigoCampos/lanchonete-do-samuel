@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D62828">
+<title>Cozinha do Samuel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/css/estilo.css">
+<link rel="stylesheet" href="/css/samuel.css">
+</head>
+<body>
+
+<!-- Tela de abertura: abre a lanchonete (o toque também libera o som) -->
+<div class="abertura fechada" id="abertura">
+  <div class="abertura-placa" id="abertura-placa"></div>
+  <h1>Cozinha do Samuel</h1>
+  <button type="button" class="botao-abrir" id="botao-abrir" aria-label="Abrir a lanchonete">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 L19 12 L8 19 Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+  </button>
+  <p class="abertura-rotulo" id="rotulo-abertura">ABRIR A LANCHONETE</p>
+  <p class="abertura-dica" id="dica-abertura">Toque no botão verde para os clientes poderem pedir.</p>
+</div>
+
+<header class="topo">
+  <div class="logo" id="logo"></div>
+  <div class="topo-textos">
+    <span class="topo-linha1">COZINHA DO</span>
+    <span class="topo-linha2">SAMUEL</span>
+  </div>
+  <div class="topo-acao fila-contador" id="fila-contador" aria-live="polite">
+    <span class="fila-icone" data-icone="pessoa"></span>
+    <strong id="fila-numero">0</strong>
+    <span class="sr-only">pedidos na fila</span>
+  </div>
+</header>
+
+<main class="conteudo">
+
+  <!-- Sem pedidos -->
+  <section id="vazio" class="vazio" hidden>
+    <div class="mascote-espera" id="mascote-espera"></div>
+    <h2>Esperando pedidos<span class="pontinhos"><span>.</span><span>.</span><span>.</span></span></h2>
+    <p id="texto-conexao">Quando chegar um pedido, vai tocar um sininho.</p>
+  </section>
+
+  <!-- Pedido atual -->
+  <section id="pedido-atual" class="pedido" hidden aria-live="polite">
+    <div class="pedido-cabeca">
+      <div class="pedido-numero"><span>nº</span><strong id="numero-atual">0</strong></div>
+      <div class="pedido-pago" id="pago-atual"></div>
+    </div>
+    <div class="letras-nome" id="letras-atual"></div>
+
+    <ul class="itens" id="itens-atual"></ul>
+
+    <div class="area-preco">
+      <button type="button" class="botao botao-branco botao-cheio" id="botao-preco" aria-expanded="false">
+        <span class="icone-botao" data-icone="olho"></span>
+        <span id="texto-botao-preco">Ver o preço</span>
+      </button>
+      <div class="preco-revelado" id="preco-revelado" hidden>
+        <span class="preco-grande"><small>R$</small><b id="total-atual">0</b></span>
+      </div>
+    </div>
+
+    <button type="button" class="botao botao-verde botao-cheio botao-entregar" id="botao-entregar">
+      <span class="icone-botao grande" data-icone="check"></span> ENTREGUE
+    </button>
+  </section>
+
+  <!-- Próximos -->
+  <section id="proximos" class="proximos" hidden>
+    <h2>Depois</h2>
+    <ul id="lista-proximos"></ul>
+  </section>
+
+  <!-- Fechar -->
+  <button type="button" class="botao botao-branco botao-cheio botao-fechar" id="botao-fechar">
+    <span class="icone-botao" data-icone="porta"></span> Fechar a lanchonete
+  </button>
+
+  <!-- Área do adulto -->
+  <details class="adulto" id="adulto">
+    <summary><span class="icone-botao" data-icone="engrenagem"></span> Opções (adulto)</summary>
+    <div class="adulto-conteudo">
+      <button type="button" class="botao botao-branco botao-pequeno" id="botao-testar-som">
+        <span class="icone-botao" data-icone="som"></span> Testar o som
+      </button>
+      <p class="adulto-titulo">Para imprimir em casa (A4, tamanho real):</p>
+      <div class="downloads">
+        <a class="botao botao-branco botao-pequeno" href="/impressao/cardapio-lanchonete-do-samuel.pdf" download>
+          <span class="icone-botao" data-icone="baixar"></span> Cardápio (PDF)
+        </a>
+        <a class="botao botao-branco botao-pequeno" href="/impressao/comandas-lanchonete-do-samuel.pdf" download>
+          <span class="icone-botao" data-icone="baixar"></span> Comandas (PDF)
+        </a>
+      </div>
+      <p class="adulto-dica">Fechar a lanchonete apaga a fila e todos os pedidos.</p>
+      <p class="adulto-dica">Deixe a tela do celular sempre ligada enquanto brinca (Configurações › Tela › Tempo limite da tela).</p>
+    </div>
+  </details>
+
+</main>
+
+<!-- Confirmação de fechar -->
+<div class="modal" id="modal-fechar" hidden>
+  <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="titulo-modal" aria-describedby="texto-modal">
+    <div class="modal-placa" id="modal-placa"></div>
+    <h2 id="titulo-modal">Fechar mesmo?</h2>
+    <p id="texto-modal">Os pedidos vão ser apagados.</p>
+    <div class="modal-botoes">
+      <button type="button" class="botao botao-branco" id="botao-nao-fechar">
+        <span class="icone-botao" data-icone="xis"></span> Não
+      </button>
+      <button type="button" class="botao botao-vermelho" id="botao-sim-fechar">
+        <span class="icone-botao" data-icone="check"></span> Sim, fechar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Alerta de pedido novo -->
+<div class="alerta-novo" id="alerta-novo" hidden>
+  <div class="alerta-caixa">
+    <div class="alerta-sino" data-icone="sino"></div>
+    <div class="alerta-titulo">Pedido novo!</div>
+    <div class="letras-nome" id="letras-alerta"></div>
+  </div>
+</div>
+
+<div class="aviso" id="aviso" role="status" hidden></div>
+
+<script src="/js/cardapio.js"></script>
+<script src="/js/icones.js"></script>
+<script src="/js/comum.js"></script>
+<script src="/js/samuel.js"></script>
+</body>
+</html>
